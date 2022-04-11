@@ -4,9 +4,15 @@ export default function Filters({ categories, setCategoryFilter }) {
     const theme = useMantineTheme();
 
     return (
-        <div style={{ margin: -theme.spacing.md, position: 'sticky', top: 116, zIndex: 1, paddingTop: 16, backgroundColor: '#f8f9fa' }}>
+        <div style={{
+            margin: -theme.spacing.md,
+            position: 'sticky',
+            top: 0,
+            zIndex: 1,
+            backgroundColor: '#f8f9fa'
+        }}>
             <Select
-                sx={{ margin: theme.spacing.md, paddingBottom: theme.spacing.md }}
+                sx={{ margin: theme.spacing.md, paddingBottom: theme.spacing.md, paddingTop: theme.spacing.md }}
                 placeholder="Filtruj kategorie"
                 data={getCategories(categories)}
                 onChange={setCategoryFilter}
