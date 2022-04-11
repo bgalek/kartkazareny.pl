@@ -17,7 +17,6 @@ export default function Filters({ categories, setCategoryFilter }) {
                 data={getCategories(categories)}
                 onChange={setCategoryFilter}
                 clearable
-                searchable
             />
         </div>
     );
