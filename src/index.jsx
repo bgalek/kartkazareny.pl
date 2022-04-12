@@ -5,8 +5,9 @@ import App from './App'
 import './index.css'
 
 const container = document.getElementById('root');
+
 createRoot(container).render(
     <React.StrictMode>
-        <App items={data.items}/>
+        <App items={data.items} lastUpdated={Date.parse(data.createdAt)}/>
     </React.StrictMode>
 );

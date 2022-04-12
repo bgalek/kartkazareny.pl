@@ -1,58 +1,49 @@
-import { AppShell, Header, Title } from '@mantine/core';
-import { formatDistanceToNow } from 'date-fns';
-import { pl } from 'date-fns/locale';
+import { AppShell, ColorSchemeProvider, MantineProvider, useMantineTheme } from '@mantine/core';
+import { useColorScheme } from '@mantine/hooks';
 import React, { useState } from 'react';
-import data from '../data.json';
 import Filters from './components/Filters';
+import { AppHeader } from './components/Header';
 import Needs from './components/Needs';
 
-export default function App({ items }) {
-    const [categoryFilter, setCategoryFilter] = useState('');
+export default function App({ items, lastUpdated }) {
+    const preferredColorScheme = useColorScheme();
+    const [colorScheme, setColorScheme] = useState(preferredColorScheme);
+    const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+    const theme = useMantineTheme();
+
+    const [category, setCategory] = useState('');
+    const categories = [...new Set(items.map(it => it.category).filter(it => it))];
+
+    function handleCategoryChange(filter) {
+        setCategory(filter);
+        document.querySelector('#root').scrollTo(0, 0);
+    }
 
     return (
-        <AppShell
-            sx={{ height: '100vh' }}
-            padding="md"
-            header={
-                <Header p="md">
-                    <div style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        alignItems: 'center',
-                        height: '100%',
-                        justifyContent: 'space-between'
-                    }}>
-                        <Title order={6}>Arena Ursynów - punkt dla Uchodźców z Ukrainy<br/>ul. Witolda Pileckiego
-                            122,
-                            02-781 Warszawa</Title>
-                        <Title order={3} sx={{ marginTop: 10 }}>Czego aktualnie potrzebujemy?</Title>
-                        <small>ostatnia aktualizacja: {formatDistanceToNow(Date.parse(data.createdAt), {
-                            locale: pl,
-                            addSuffix: true
-                        })}</small>
-                    </div>
-                </Header>
-            }
-            styles={
-                (theme) => ({
-                    main: {
-                        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-                        paddingTop: 0
-                    }
-                })
-            }>
-            <Filters setCategoryFilter={(filter) => {
-                setCategoryFilter(filter);
-                document.querySelector('#root').scrollTo(0, 0);
-            }}
-                     categories={[...new Set(items.map(it => it.category).filter(it => it))]}/>
-            <Needs items={filterItems(items, categoryFilter)}/>
-        </AppShell>
+        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+            <MantineProvider theme={{ colorScheme }}>
+                <AppShell
+                    sx={{
+                        height: '100vh',
+                        backgroundColor: colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[0]
+                    }}
+                    padding="md"
+                    header={<AppHeader lastUpdated={lastUpdated}/>}
+                    styles={appStyles}
+                >
+                    <Filters setCategoryFilter={handleCategoryChange} categories={categories}/>
+                    <Needs items={items} category={category}/>
+                </AppShell>
+            </MantineProvider>
+        </ColorSchemeProvider>
     );
 }
 
-function filterItems(items, categoryFilter) {
-    return items
-        .filter(it => categoryFilter ? categoryFilter.toLowerCase() === it.category?.toLowerCase() : true)
-        .sort((a, b) => a.priority - b.priority);
+function appStyles(theme) {
+    return {
+        main: {
+            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[0],
+            paddingTop: 0
+        }
+    }
 }

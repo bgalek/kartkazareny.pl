@@ -2,15 +2,15 @@ import { Select, useMantineTheme } from '@mantine/core';
 
 export default function Filters({ categories, setCategoryFilter }) {
     const theme = useMantineTheme();
-
+    const styles = {
+        margin: -theme.spacing.md,
+        position: 'sticky',
+        top: 0,
+        zIndex: 1,
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[0]
+    };
     return (
-        <div style={{
-            margin: -theme.spacing.md,
-            position: 'sticky',
-            top: 0,
-            zIndex: 1,
-            backgroundColor: '#f8f9fa'
-        }}>
+        <div style={styles} id="test">
             <Select
                 sx={{ margin: theme.spacing.md, paddingBottom: theme.spacing.md, paddingTop: theme.spacing.md }}
                 placeholder="Filtruj kategorie"
