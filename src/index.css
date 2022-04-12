@@ -13,4 +13,5 @@ body {
 
 #root {
     overflow: scroll;
+    scroll-behavior: smooth;
 }

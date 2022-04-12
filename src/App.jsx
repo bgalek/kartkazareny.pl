@@ -1,5 +1,4 @@
 import { AppShell, Header, Title } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
 import { formatDistanceToNow } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import React, { useState } from 'react';
@@ -9,7 +8,7 @@ import Needs from './components/Needs';
 
 export default function App({ items }) {
     const [categoryFilter, setCategoryFilter] = useState('');
-    const matches = useMediaQuery('(min-width: 900px)');
+
     return (
         <AppShell
             sx={{ height: '100vh' }}
@@ -42,7 +41,10 @@ export default function App({ items }) {
                     }
                 })
             }>
-            <Filters setCategoryFilter={setCategoryFilter}
+            <Filters setCategoryFilter={(filter) => {
+                setCategoryFilter(filter);
+                document.querySelector('#root').scrollTo(0, 0);
+            }}
                      categories={[...new Set(items.map(it => it.category).filter(it => it))]}/>
             <Needs items={filterItems(items, categoryFilter)}/>
         </AppShell>
