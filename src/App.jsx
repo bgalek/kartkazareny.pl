@@ -1,7 +1,8 @@
-import { AppShell, ColorSchemeProvider, Container, MantineProvider, useMantineTheme } from '@mantine/core';
+import { AppShell, ColorSchemeProvider, Container, MantineProvider, useMantineTheme, Footer } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import React, { useState } from 'react';
 import Filters from './components/Filters';
+import { AppFooter } from './components/Footer';
 import { AppHeader } from './components/Header';
 import Needs from './components/Needs';
 
@@ -29,6 +30,7 @@ export default function App({ items, lastUpdated }) {
                     }}
                     padding="md"
                     header={<AppHeader lastUpdated={lastUpdated}/>}
+                    footer={<AppFooter />}
                     styles={appStyles}
                 >
                     <Container size="lg">
