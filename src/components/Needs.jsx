@@ -7,7 +7,7 @@ export default function Needs({ items, category }) {
         <Grid>
             {filterItems(items, category).map((item, i) => (
                 <Grid.Col key={item.name + i} md={6} lg={4}>
-                    <MediaQuery largerThan="sm" styles={{ minHeight: 100 }}>
+                    <MediaQuery largerThan="sm" styles={{ minHeight: 128 }}>
                         <Card shadow="sm" p="md" sx={{ minHeight: 'auto' }}>
                             <CardBadge item={item}/>
                             <Text size="sm" weight={300}>{item.name}</Text>
