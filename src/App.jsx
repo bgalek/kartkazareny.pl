@@ -1,4 +1,4 @@
-import { AppShell, ColorSchemeProvider, Container, MantineProvider, useMantineTheme, Footer } from '@mantine/core';
+import { AppShell, ColorSchemeProvider, Container, MantineProvider, useMantineTheme } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import React, { useState } from 'react';
 import Filters from './components/Filters';
@@ -25,12 +25,14 @@ export default function App({ items, lastUpdated }) {
             <MantineProvider theme={{ colorScheme }}>
                 <AppShell
                     sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
                         height: '100vh',
                         backgroundColor: colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[0]
                     }}
                     padding="md"
                     header={<AppHeader lastUpdated={lastUpdated}/>}
-                    footer={<AppFooter />}
+                    footer={<AppFooter/>}
                     styles={appStyles}
                 >
                     <Container size="lg">
@@ -45,6 +47,9 @@ export default function App({ items, lastUpdated }) {
 
 function appStyles(theme) {
     return {
+        body: {
+            flex: 1
+        },
         main: {
             backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[0],
             paddingTop: 0
