@@ -24,13 +24,13 @@ export function AppHeader({ lastUpdated }) {
                         width: '100%'
                     })}>
                         <img src={heart} alt="logo"
-                             style={{ height: 50, minWidth: 70, flex: '0', paddingRight: 16 }}/>
+                             style={{ height: 44, minWidth: 40, width: 40, flex: '0', paddingRight: 16 }}/>
                         <span style={{ flexGrow: 1 }}>
                             <Title order={4} sx={{}}>Czego aktualnie potrzebujemy?</Title>
                             <small>ostatnia aktualizacja: {formatDate(lastUpdated)}</small>
                         </span>
                         <MediaQuery largerThan="sm" styles={{ textAlign: 'right', marginTop: 0, width: 'auto'}}>
-                            <Title order={6} style={{ fontSize: 12 }} sx={{ textAlign: 'center', marginTop: 16, width: '100%' }}>
+                            <Title order={5} style={{ fontSize: 12 }} sx={{ textAlign: 'center', marginTop: 16, width: '100%' }}>
                                 Arena Ursynów - punkt dla Uchodźców z Ukrainy
                                 <br/>
                                 ul. Witolda Pileckiego 122, 02-781 Warszawa
