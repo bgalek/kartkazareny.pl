@@ -4,16 +4,16 @@ import React from 'react';
 export function CardBadge({ item }) {
     const theme = useMantineTheme();
     return (
-        <Badge sx={{ marginBottom: theme.spacing.sm }} color={getBadgeColor(item.priority)} variant="light">
+        <Badge sx={{ marginBottom: theme.spacing.sm }} color={getBadgeColor(item.priority, theme)} variant="filled" radius="sm">
             {getBadgeLabel(item.priority)} ({Math.abs(item.count)} {item.unit})
         </Badge>
     );
 }
 
-function getBadgeColor(priority) {
+function getBadgeColor(priority, theme) {
     switch (priority) {
         case 1: {
-            return 'pink';
+            return 'red';
         }
         case 2: {
             return 'orange'

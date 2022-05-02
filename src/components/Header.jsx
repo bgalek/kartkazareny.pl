@@ -1,7 +1,8 @@
-import { Card, Header, Paper, Title } from '@mantine/core';
+import { Box, Container, Header, MediaQuery, Paper, Title } from '@mantine/core';
 import { formatDistanceToNow } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import React from 'react';
+import heart from './heart.svg';
 
 const styles = {
     display: 'flex',
@@ -14,15 +15,30 @@ const styles = {
 export function AppHeader({ lastUpdated }) {
     return (
         <Header p="md">
-            <Paper style={styles}>
-                <Title order={6}>
-                    Arena Ursynów - punkt dla Uchodźców z Ukrainy
-                    <br/>
-                    ul. Witolda Pileckiego 122, 02-781 Warszawa
-                </Title>
-                <Title order={3} sx={{ marginTop: 10 }}>Czego aktualnie potrzebujemy?</Title>
-                <small>ostatnia aktualizacja: {formatDate(lastUpdated)}</small>
-            </Paper>
+            <Container size="lg" px={0}>
+                <Paper style={styles}>
+                    <Box sx={(theme) => ({
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexWrap: 'wrap',
+                        width: '100%'
+                    })}>
+                        <img src={heart} alt="logo"
+                             style={{ height: 50, minWidth: 70, flex: '0', paddingRight: 16 }}/>
+                        <span style={{ flexGrow: 1 }}>
+                            <Title order={4} sx={{}}>Czego aktualnie potrzebujemy?</Title>
+                            <small>ostatnia aktualizacja: {formatDate(lastUpdated)}</small>
+                        </span>
+                        <MediaQuery largerThan="sm" styles={{ textAlign: 'right', marginTop: 0, width: 'auto'}}>
+                            <Title order={6} style={{ fontSize: 12 }} sx={{ textAlign: 'center', marginTop: 16, width: '100%' }}>
+                                Arena Ursynów - punkt dla Uchodźców z Ukrainy
+                                <br/>
+                                ul. Witolda Pileckiego 122, 02-781 Warszawa
+                            </Title>
+                        </MediaQuery>
+                    </Box>
+                </Paper>
+            </Container>
         </Header>
     );
 }

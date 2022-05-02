@@ -1,4 +1,4 @@
-import { AppShell, ColorSchemeProvider, MantineProvider, useMantineTheme } from '@mantine/core';
+import { AppShell, ColorSchemeProvider, Container, MantineProvider, useMantineTheme } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import React, { useState } from 'react';
 import Filters from './components/Filters';
@@ -31,8 +31,10 @@ export default function App({ items, lastUpdated }) {
                     header={<AppHeader lastUpdated={lastUpdated}/>}
                     styles={appStyles}
                 >
-                    <Filters setCategoryFilter={handleCategoryChange} categories={categories}/>
-                    <Needs items={items} category={category}/>
+                    <Container size="lg">
+                        <Filters setCategoryFilter={handleCategoryChange} categories={categories}/>
+                        <Needs items={items} category={category}/>
+                    </Container>
                 </AppShell>
             </MantineProvider>
         </ColorSchemeProvider>

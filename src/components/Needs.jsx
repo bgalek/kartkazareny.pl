@@ -1,17 +1,21 @@
-import { Card, Stack, Text } from '@mantine/core';
+import { Card, Grid, MediaQuery, Text } from '@mantine/core';
 import React from 'react';
 import { CardBadge } from './CardBadge';
 
 export default function Needs({ items, category }) {
     return (
-        <Stack>
+        <Grid>
             {filterItems(items, category).map((item, i) => (
-                <Card key={item.name + i} shadow="sm" p="md">
-                    <CardBadge item={item}/>
-                    <Text weight={300}>{item.name}</Text>
-                </Card>
+                <Grid.Col key={item.name + i} md={6} lg={3}>
+                    <MediaQuery largerThan="sm" styles={{ minHeight: 165 }}>
+                        <Card shadow="sm" p="md" sx={{ minHeight: 'auto' }}>
+                            <CardBadge item={item}/>
+                            <Text weight={300}>{item.name}</Text>
+                        </Card>
+                    </MediaQuery>
+                </Grid.Col>
             ))}
-        </Stack>
+        </Grid>
     );
 }
 
