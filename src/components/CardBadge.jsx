@@ -1,16 +1,20 @@
 import { Badge, useMantineTheme } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import React from 'react';
 
 export function CardBadge({ item }) {
     const theme = useMantineTheme();
+    const matches = useMediaQuery('(min-width: 900px)');
+
     return (
-        <Badge sx={{ marginBottom: theme.spacing.sm }} color={getBadgeColor(item.priority, theme)} variant="filled" radius="sm">
+        <Badge sx={{ marginBottom: theme.spacing.md }} color={getBadgeColor(item.priority)} variant="filled"
+               radius="sm" size={matches ? 'lg' : 'sm'}>
             {getBadgeLabel(item.priority)} ({Math.abs(item.count)} {item.unit})
         </Badge>
     );
 }
 
-function getBadgeColor(priority, theme) {
+function getBadgeColor(priority) {
     switch (priority) {
         case 1: {
             return 'red';
@@ -19,10 +23,10 @@ function getBadgeColor(priority, theme) {
             return 'orange'
         }
         case 3: {
-            return 'lime'
+            return 'green'
         }
         case 4: {
-            return 'green'
+            return 'blue'
         }
         default: {
             return 'gray'
